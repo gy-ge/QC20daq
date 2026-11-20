@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <CollectorOutput>$(ArtifactsPath)\bin\QC20daq.Collector\$(Configuration.ToLowerInvariant())</CollectorOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QC20daq.Collector\QC20daq.Collector.csproj" Condition="'$(RuntimeIdentifier)' == ''"
+                      ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true"
+                      GlobalPropertiesToRemove="RuntimeIdentifier;SelfContained;PublishSingleFile;IncludeNativeLibrariesForSelfExtract" />
+    <EmbeddedResource Include="Web\index.html;Web\app.css;Web\app.js" LogicalName="QC20.Web.%(Filename)%(Extension)" />
+    <Content Include="$(CollectorOutput)\Qc20Capture.exe;$(CollectorOutput)\Qc20Capture.exe.config"
+             Link="collector\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+</Project>

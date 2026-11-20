@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="QC20daq/QC20daq.csproj" />
+  <Project Path="QC20daq.Collector/QC20daq.Collector.csproj" />
+  <Project Path="QC20daq.Verification/QC20daq.Verification.csproj" />
+</Solution>

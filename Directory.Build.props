@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <ArtifactsPath Condition="'$(ArtifactsPath)' == ''">$(LOCALAPPDATA)\Codex\Runtimes\QC20daq\build</ArtifactsPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);**/obj/**;**/bin/**</DefaultItemExcludes>
+    <TraceDirectory Condition="'$(TraceDirectory)' == ''">C:\Program Files (x86)\Renishaw Ballbar Trace</TraceDirectory>
+  </PropertyGroup>
+</Project>
