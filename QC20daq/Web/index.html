@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QC20 球杆采集台</title>
+  <title data-i18n="pageTitle">QC20 球杆采集台</title>
   <link rel="stylesheet" href="/app.css">
   <script defer src="/app.js"></script>
 </head>
@@ -12,109 +12,116 @@
     <div class="masthead-inner">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true"><i></i><i></i></div>
-        <div><div class="brand-name">QC20 采集台</div><div class="brand-sub">旋转轴测量</div></div>
+        <div><div class="brand-name" data-i18n="brandName">QC20 采集台</div><div class="brand-sub" data-i18n="brandSubtitle">旋转轴测量</div></div>
       </div>
       <div class="service-actions">
-        <div id="online" class="online" role="status"><span></span>正在连接本机服务</div>
-        <button id="shutdown" class="button compact service-button" type="button" disabled>关闭服务</button>
+        <select id="language" class="language-select" aria-label="界面语言" data-i18n-label="language">
+          <option value="zh-CN">中文</option>
+          <option value="en">English</option>
+        </select>
+        <div id="online" class="online" role="status">
+          <span class="online-dot" aria-hidden="true"></span>
+          <span id="online-label" data-i18n="serviceConnecting">正在连接本机服务</span>
+        </div>
+        <button id="shutdown" class="button compact service-button" type="button" disabled data-i18n="shutDown">关闭服务</button>
       </div>
     </div>
   </header>
 
   <main class="shell">
     <div class="page-heading">
-      <div><h1>球杆实时采集</h1><p id="session-label">等待连接设备</p></div>
-      <div id="phase" class="state-pill" data-tone="quiet" role="status">未连接</div>
+      <div><h1 data-i18n="pageHeading">球杆实时采集</h1><p id="session-label" data-i18n="waitForDevice">等待连接设备</p></div>
+      <div id="phase" class="state-pill" data-tone="quiet" role="status" data-i18n="idle">未连接</div>
     </div>
 
-    <section class="metrics" aria-label="实时数值">
-      <div class="metric primary"><span id="reading-label">当前读数</span><div><b id="reading">—</b><small>µm</small></div></div>
-      <div class="metric"><span>已记录</span><div><b id="count">0</b><small>点</small></div></div>
-      <div class="metric"><span>记录时间</span><div><b id="elapsed">—</b><small>s</small></div></div>
-      <div class="metric"><span>标称采样率</span><div><b id="sample-rate">—</b><small>Hz</small></div></div>
+    <section class="metrics" aria-label="实时数值" data-i18n-label="liveMetrics">
+      <div class="metric primary"><span id="reading-label" data-i18n="currentReading">当前读数</span><div><b id="reading">—</b><small>µm</small></div></div>
+      <div class="metric"><span data-i18n="recorded">已记录</span><div><b id="count">0</b><small data-i18n="samples">点</small></div></div>
+      <div class="metric"><span data-i18n="recordTime">记录时间</span><div><b id="elapsed">—</b><small>s</small></div></div>
+      <div class="metric"><span data-i18n="nominalRate">标称采样率</span><div><b id="sample-rate">—</b><small>Hz</small></div></div>
     </section>
 
     <div class="workspace">
-      <section class="panel chart-panel" aria-label="实时曲线">
+      <section class="panel chart-panel" aria-label="实时曲线" data-i18n-label="liveChart">
         <div class="panel-head">
-          <div><h2>球距变化</h2><p>最近 12 秒 · 相对预览起点</p></div>
+          <div><h2 data-i18n="chartHeading">球距变化</h2><p data-i18n="chartWindow">最近 12 秒 · 相对预览起点</p></div>
           <div class="preview-actions">
-            <label for="refresh-delay">刷新间隔</label>
+            <label for="refresh-delay" data-i18n="refreshInterval">刷新间隔</label>
             <select id="refresh-delay">
               <option value="100" selected>100 ms</option>
               <option value="200">200 ms</option>
               <option value="500">500 ms</option>
               <option value="1000">1000 ms</option>
             </select>
-            <button id="pause" class="button secondary compact" type="button" disabled>暂停预览</button>
+            <button id="pause" class="button secondary compact" type="button" disabled data-i18n="pause">暂停预览</button>
           </div>
         </div>
         <div class="chart-wrap" id="chart-wrap">
-          <canvas id="chart" role="img" aria-label="球杆读数随时间的曲线"></canvas>
-          <div id="chart-empty" class="chart-empty"><span class="empty-mark" aria-hidden="true"></span><span id="empty-text">连接球杆后显示实时曲线</span></div>
+          <canvas id="chart" role="img" aria-label="球杆读数随时间的曲线" data-i18n-label="chartDescription"></canvas>
+          <div id="chart-empty" class="chart-empty"><span class="empty-mark" aria-hidden="true"></span><span id="empty-text" data-i18n="connectForPreview">连接球杆后显示实时曲线</span></div>
         </div>
         <div class="chart-footer">
-          <span><i></i><span id="plot-state">等待数据</span></span>
-          <span>窗内峰峰值 <b id="pkpk">—</b> µm</span>
-          <span id="range">量程待读取</span>
+          <span><i></i><span id="plot-state" data-i18n="waitForData">等待数据</span></span>
+          <span><span data-i18n="peakToPeak">窗内峰峰值</span> <b id="pkpk">—</b> µm</span>
+          <span id="range" data-i18n="waitForRange">量程待读取</span>
         </div>
       </section>
 
-      <aside class="panel control-panel" aria-label="采集控制">
-        <div class="panel-head"><div><h2>设备连接</h2><p id="device-summary">等待连接</p></div></div>
+      <aside class="panel control-panel" aria-label="采集控制" data-i18n-label="captureControls">
+        <div class="panel-head"><div><h2 data-i18n="deviceConnection">设备连接</h2><p id="device-summary" data-i18n="waitForConnection">等待连接</p></div></div>
         <form id="capture-form">
-          <fieldset class="source-field"><legend class="label">数据来源</legend>
+          <fieldset class="source-field"><legend class="label" data-i18n="dataSource">数据来源</legend>
             <div class="segmented">
-              <label><input type="radio" name="source" value="device" checked><span>实机</span></label>
-              <label><input type="radio" name="source" value="simulated"><span>模拟</span></label>
+              <label><input type="radio" name="source" value="device" checked><span data-i18n="device">实机</span></label>
+              <label><input type="radio" name="source" value="simulated"><span data-i18n="simulation">模拟</span></label>
             </div>
           </fieldset>
           <div id="device-fields">
-            <label class="label" for="target">球杆设备</label>
+            <label class="label" for="target" data-i18n="ballbarDevice">球杆设备</label>
             <div class="target-line">
-              <select id="target"><option value="trace">Trace 历史设备</option></select>
-              <button id="discover" type="button" class="button secondary compact">搜索设备</button>
+              <select id="target"><option value="trace" data-i18n="traceSavedDevice">Trace 历史设备</option></select>
+              <button id="discover" type="button" class="button secondary compact" data-i18n="searchDevices">搜索设备</button>
             </div>
           </div>
-          <div><label class="label" for="rate">采样率</label>
+          <div><label class="label" for="rate" data-i18n="sampleRate">采样率</label>
             <select id="rate">
-              <option value="native" selected>设备原生</option>
+              <option value="native" selected data-i18n="nativeRate">设备原生</option>
               <option value="500">500 Hz</option><option value="250">250 Hz</option><option value="100">100 Hz</option>
             </select>
           </div>
           <div class="connection-actions">
-            <button id="connect" class="button connect" type="button" disabled>连接</button>
-            <button id="disconnect" class="button secondary" type="button" disabled>断开</button>
+            <button id="connect" class="button connect" type="button" disabled data-i18n="connect">连接</button>
+            <button id="disconnect" class="button secondary" type="button" disabled data-i18n="disconnect">断开</button>
           </div>
           <div class="record-settings">
-            <h3>记录</h3>
+            <h3 data-i18n="recordingHeading">记录</h3>
             <div class="form-pair">
-              <div><label class="label" for="mode">停止方式</label>
-                <select id="mode"><option value="timed" selected>按时长</option><option value="manual">手动</option></select>
+              <div><label class="label" for="mode" data-i18n="stopMode">停止方式</label>
+                <select id="mode"><option value="timed" selected data-i18n="timed">按时长</option><option value="manual" data-i18n="manual">手动</option></select>
               </div>
-              <div id="duration-field"><label class="label" for="duration">目标时长</label>
+              <div id="duration-field"><label class="label" for="duration" data-i18n="targetDuration">目标时长</label>
                 <div class="input-unit"><input id="duration" type="number" min="0" step="any" value="30" required><span>s</span></div>
               </div>
             </div>
             <div class="record-actions">
-              <button id="start" class="button record" type="submit" disabled><span class="record-symbol" aria-hidden="true"></span>开始记录</button>
-              <button id="stop" class="button stop" type="button" disabled><span class="stop-symbol" aria-hidden="true"></span>停止并保存</button>
+              <button id="start" class="button record" type="submit" disabled><span class="record-symbol" aria-hidden="true"></span><span data-i18n="startRecording">开始记录</span></button>
+              <button id="stop" class="button stop" type="button" disabled><span class="stop-symbol" aria-hidden="true"></span><span data-i18n="stopAndSave">停止并保存</span></button>
             </div>
           </div>
         </form>
-        <p id="notice" class="notice" aria-live="polite">等待操作</p>
+        <p id="notice" class="notice" aria-live="polite" data-i18n="waitForAction">等待操作</p>
       </aside>
     </div>
 
-    <section class="panel history-panel" aria-label="保存记录">
-      <div class="panel-head"><div><h2>保存记录</h2><p>最近的本机 Web 采集会话</p></div></div>
+    <section class="panel history-panel" aria-label="保存记录" data-i18n-label="savedRecords">
+      <div class="panel-head"><div><h2 data-i18n="savedRecords">保存记录</h2><p data-i18n="recentSessions">最近的本机 Web 采集会话</p></div></div>
       <div class="table-scroll">
         <table>
-          <thead><tr><th>结束时间</th><th>来源</th><th>结果</th><th>采样率</th><th>点数</th><th>记录时间</th><th>文件</th></tr></thead>
-          <tbody id="history"><tr><td class="empty-history" colspan="7">暂无保存记录</td></tr></tbody>
+          <thead><tr><th data-i18n="closedAt">结束时间</th><th data-i18n="source">来源</th><th data-i18n="result">结果</th><th data-i18n="sampleRate">采样率</th><th data-i18n="sampleCount">点数</th><th data-i18n="recordTime">记录时间</th><th data-i18n="files">文件</th></tr></thead>
+          <tbody id="history"><tr><td class="empty-history" colspan="7" data-i18n="noRecords">暂无保存记录</td></tr></tbody>
         </table>
       </div>
-      <div id="session-path-wrap" class="path-row" hidden><span>会话目录</span><code id="session-path"></code></div>
+      <div id="session-path-wrap" class="path-row" hidden><span data-i18n="sessionFolder">会话目录</span><code id="session-path"></code></div>
     </section>
   </main>
 </body>

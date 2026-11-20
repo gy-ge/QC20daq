@@ -14,7 +14,7 @@ QC20daq is a Windows data acquisition utility for the Renishaw QC20-W ballbar. I
 
 ### Connect and record
 
-The current web interface displays Chinese labels. The names in parentheses below match the controls on screen.
+Use the language menu in the page header to switch between **中文** and **English**. On the first visit, the page uses Chinese for Chinese browser settings and English otherwise. The browser remembers your choice. The names in parentheses below are the Chinese labels.
 
 1. **Launch.** Extract the complete ZIP to a writable local folder. Keep `collector/` next to `QC20daq.exe`, then double-click the EXE. The application opens [http://127.0.0.1:8765/](http://127.0.0.1:8765/) in your default browser.
 2. **Connect.** Wake the ballbar and place it near the Bluetooth receiver. Select **Device** (实机). Select the device saved by Trace (Trace 历史设备), or click **Search devices** (搜索设备) and select the ballbar by serial number. Choose a nominal sampling rate (up to 1000 Hz), then click **Connect** (连接). Check the live readings, curve, and range indicator before recording. To try the interface without a ballbar, select **Simulation** (模拟).
